@@ -1,5 +1,5 @@
 [package]
-name = "routemaster-client"
+name = "routemaster"
 version = "0.1.0"
 authors = ["Andrii Dmytrenko <andrii.dmytrenko@deliveroo.co.uk>"]
 
