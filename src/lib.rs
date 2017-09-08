@@ -107,6 +107,10 @@ impl Client {
 mod tests {
     #[test]
     fn it_works() {
-        assert_eq!(2 + 2, 4);
+        use super::{Uuid, Url, Client};
+        let uuid = Uuid::parse_str("936DA01F9ABD4d9d80C702AF85C822A8").expect("Can't parse uuid");
+        let url = Url::parse("https://routemaster.url").expect("Can't parse URL");
+        #[allow(unused_variables)]
+        let client = Client::new(url, uuid).expect("Failed creating client");
     }
 }
