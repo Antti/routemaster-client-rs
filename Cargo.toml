@@ -1,0 +1,12 @@
+[package]
+name = "routemaster-client"
+version = "0.1.0"
+authors = ["Andrii Dmytrenko <andrii.dmytrenko@deliveroo.co.uk>"]
+
+[dependencies]
+reqwest = "*"
+url = "*"
+uuid = "0.4"
+error-chain = "*"
+chrono = "*"
+serde = "*"
