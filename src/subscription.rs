@@ -5,13 +5,12 @@ use serde::ser::{Serialize, Serializer, SerializeStruct};
 
 #[derive(Debug)]
 pub struct Subscription {
-    callback_url: Url,
-    topics: Vec<String>,
-    uuid: Option<Uuid>,
-    timeout: Option<Duration>,
-    max_events: usize
+    pub callback_url: Url,
+    pub topics: Vec<String>,
+    pub uuid: Option<Uuid>,
+    pub timeout: Option<Duration>,
+    pub max_events: Option<usize>
 }
-
 
 impl Serialize for Subscription {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>

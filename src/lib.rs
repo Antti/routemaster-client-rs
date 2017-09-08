@@ -14,8 +14,8 @@ pub use error::*;
 pub use event::*;
 pub use subscription::*;
 
-use url::Url;
-use uuid::Uuid;
+pub use url::Url;
+pub use uuid::Uuid;
 
 pub struct Client {
     client: reqwest::Client,
@@ -24,6 +24,15 @@ pub struct Client {
 }
 
 impl Client {
+    /// Create a new `Client` instance
+    /// # Example
+    /// ```rust
+    /// use routemaster::{Uuid, Url, Client};
+    ///
+    /// let uuid = Uuid::parse_str("936DA01F9ABD4d9d80C702AF85C822A8").expect("Can't parse uuid");
+    /// let url = Url::parse("https://routemaster.url").expect("Can't parse URL");
+    /// let client = Client::new(url, uuid).expect("Failed creating client");
+    /// ```
     pub fn new(url: Url, uuid: Uuid) -> Result<Self> {
         Ok(Client {
             client: reqwest::Client::new()?,
@@ -31,6 +40,24 @@ impl Client {
             uuid
         })
     }
+
+    /// Subscribe client to a new topic
+    /// # Example
+    /// ```rust,no_run
+    /// use routemaster::{Uuid, Url, Client, Subscription};
+    ///
+    /// let uuid = Uuid::parse_str("936DA01F9ABD4d9d80C702AF85C822A8").expect("Can't parse uuid");
+    /// let url = Url::parse("https://routemaster.url").expect("Can't parse URL");
+    /// let client = Client::new(url, uuid).expect("Failed creating client");
+    /// let subscription = Subscription {
+    ///     callback_url: Url::parse("https://my-service.url").expect("Can't parse URL"),
+    ///     topics: vec!["orders".to_string(), "riders".to_string()],
+    ///     uuid: None,
+    ///     timeout: None,
+    ///     max_events: None
+    /// };
+    /// client.subscribe(subscription).expect("Subscription failed");
+    /// ```
 
     pub fn subscribe(&self, subscription: Subscription) -> Result<()> {
         self.client.post(self.url.join("subscription")?)?

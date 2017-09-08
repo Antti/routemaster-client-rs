@@ -14,10 +14,10 @@ pub enum EventType {
 
 #[derive(Debug)]
 pub struct Event {
-    event_type: EventType,
-    callback_url: Url,
-    data: String,
-    timestamp: Option<NaiveDateTime>
+    pub event_type: EventType,
+    pub callback_url: Url,
+    pub data: String,
+    pub timestamp: Option<NaiveDateTime>
 }
 
 impl fmt::Display for EventType {
